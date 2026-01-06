@@ -1,10 +1,10 @@
     /**************************************************************************************************
         NAME:   v_customer_fulfillment 
-        VERSION: 12
+        VERSION: 13
 
         COMMENTS: 
         v12     use the  WITH command for certain subqueries.   12/12/2025 imcgrath
-        
+        v13     filter out person types other than Customer
 
 **************************************************************************************************/
 CREATE OR REPLACE VIEW CUST_ADMIN.V_CUSTOMER_FULFILLMENT as
@@ -96,6 +96,7 @@ left join cust_admin.person_address dcq
     and dcq.address_type_id >1
     and dcq.preferred_flag='Y'
     AND dcq.id = ADDJ.maxid
+WHERE person_type_id=1
 ;
 
   GRANT SELECT ON "CUST_ADMIN"."V_CUSTOMER_FULFILLMENT2" TO "CUST_FULL";
