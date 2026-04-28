@@ -1,10 +1,11 @@
 /***************************************************************************************************
         NAME:   fn_brandMask
-        VERSION: 1
+        VERSION: 2
 
         COMMENTS: expands the brandmask into the descriptions of the constituent brands
         
         4/27/26     v1 it works!
+        4/28/26     v2 add permission grants for other users    
 
 **************************************************************************************************/
 
