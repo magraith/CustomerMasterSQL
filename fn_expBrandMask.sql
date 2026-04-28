@@ -8,7 +8,7 @@
 
 **************************************************************************************************/
 
-create OR REPLACE function cust_admin.fn_expBrandMask(mask IN NUMBER) 
+create OR REPLACE function CUST_ADMIN.FN_EXPBRANDMASK(mask IN NUMBER) 
     RETURN string
     IS brandExp VARCHAR(100);
     BEGIN
@@ -35,6 +35,10 @@ create OR REPLACE function cust_admin.fn_expBrandMask(mask IN NUMBER)
          );
          RETURN brandExp;
     END;
+    
+
+  GRANT EXECUTE ON "CUST_ADMIN"."FN_EXPBRANDMASK" TO "CUST_FULL";
+  GRANT EXECUTE ON "CUST_ADMIN"."FN_EXPBRANDMASK" TO "CUST_READ";    
 
 /*    
     select key, email_address,brand_mask, cust_admin.fn_expBrandMask(p.brand_Mask) as brands
