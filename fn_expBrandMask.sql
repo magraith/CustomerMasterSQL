@@ -9,7 +9,7 @@
 
 **************************************************************************************************/
 
-create OR REPLACE function CUST_ADMIN.FN_EXPBRANDMASK(mask IN NUMBER) 
+CREATE OR REPLACE function CUST_ADMIN.FN_EXPBRANDMASK(mask IN NUMBER) 
     RETURN string
     IS brandExp VARCHAR(100);
     BEGIN
@@ -25,10 +25,10 @@ create OR REPLACE function CUST_ADMIN.FN_EXPBRANDMASK(mask IN NUMBER)
         FROM (   select * from (SELECT gm.local_id as brand_id, gm.foreign_id
             FROM cust_admin.generic_metadata gm
             WHERE gm.field_name='BRAND_ID' 
-            and BITAND(mask,to_number(gm.display_order))= gm.display_order
+            and BITAND(mask,gm.display_order)= gm.display_order
             )   
             PIVOT (
-                    min(foreign_id) Brand
+                    MIN(foreign_id) Brand
                     FOR brand_id
                     IN ( 1 as brand1, 3 as brand3, 4 as brand4, 5 as brand5, 6 as brand6, 7 as brand7,9 as brand9 )
                     --(select DISTINCT FOREIGN_ID from cust_admin.generic_Metadata where field_name='BRAND_ID')
@@ -42,15 +42,15 @@ create OR REPLACE function CUST_ADMIN.FN_EXPBRANDMASK(mask IN NUMBER)
   GRANT EXECUTE ON "CUST_ADMIN"."FN_EXPBRANDMASK" TO "CUST_READ";    
 
 /*    
-    select key, email_address,brand_mask, cust_admin.fn_expBrandMask(p.brand_Mask) as brands
-    from  person p
-    where brand_mask> 10;
+    select key, email_address,brand_mask --, cust_admin.fn_expBrandMask(p.brand_Mask) as brands
+    from  cust_admin.person p
+    where brand_mask> 50;
 
 SELECT * FROM CUST_ADMIN.GENERIC_METADATA 
 -- where foreign_id='tcprefcenterpub';
 WHERE FIELD_NAME = 'BRAND_ID';
 
-select p.key, p.email_address, brand_mask, notes, local_id, foreign_id
+select p.key, p.email_address, brand_mask, notes, local_id, foreign_id, display_order
 from cust_admin.person p 
 join cust_admin.generic_metadata gmb
 on bitand(p.brand_mask,TO_NUMBER(gmb.display_order) ) = to_number(gmb.display_order)
