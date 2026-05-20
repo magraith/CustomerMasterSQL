@@ -1,11 +1,12 @@
 /***************************************************************************************************
-        NAME:   fn_brandMask
-        VERSION: 2
+        NAME:   fn_expBrandMask
+        VERSION: 3
 
         COMMENTS: expands the brandmask into the descriptions of the constituent brands
         
         4/27/26     v1 it works!
-        4/28/26     v2 add permission grants for other users    
+        4/28/26     v2 add permission grants for other users  
+        5/20/26     v3 removed conversion of display_order to_num
 
 **************************************************************************************************/
 
