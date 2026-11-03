@@ -37,7 +37,7 @@ SELECT distinct  e.Event_ID as EventID,
 FROM event_detail e   inner join event_header r on e.event_header_id = r.event_header_id
                       inner join event_detail_item  t on t.event_id = e.event_id
                       INNER JOIN item i on i.item_num= t.item_num
-                      INNER JOIN event_type et ON et.event_type_id = e.event_type_id
+                      LEFT  JOIN event_type et ON et.event_type_id = e.event_type_id
                       LEFT JOIN event_status es ON e.status_id = es.id
                       LEFT JOIN event_item_contributor eic ON eic.event_id = e.event_id AND eic.item_num = t.item_num
                       LEFT JOIN contributor c ON eic.contributor_id = c.contributor_id
